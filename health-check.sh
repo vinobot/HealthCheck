@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-THRESHOLD_CPU=100
+THRESHOLD_CPU=80
 THRESHOLD_MEM=80
 THRESHOLD_DISK=80
 EMAIL="babu@testleaf.com"
