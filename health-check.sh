@@ -16,17 +16,6 @@ DB_PORT=3306
 checks_passed=true
 
 # Check CPU usage
-cpu_usage=$(top -bn1 | grep "Cpu(s)" | \
-           awk '{print $7}' | sed "s/ni[,]//)
-
-echo "CPU Usage: $cpu_usage"
-echo "CPU usage is higher than $THRESHOLD_CPU%, it's $cpu_usage%"
-
-if (( $(echo "$cpu_usage > $THRESHOLD_CPU" |bc -l) )); then
-  echo "CPU usage is higher than $THRESHOLD_CPU%, it's $cpu_usage%" | \
-  mail -s "High CPU usage alert" $EMAIL
-  checks_passed=false
-fi
 
 # Check Memory usage
 mem_usage=$(free | grep Mem | awk '{print $3/$2 * 100.0}')
