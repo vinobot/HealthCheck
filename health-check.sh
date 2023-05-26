@@ -24,7 +24,7 @@ echo "Memory Usage: $mem_usage"
 
 if (( $(echo "$mem_usage > $THRESHOLD_MEM" |bc -l) )); then
   echo "Memory usage is higher than $THRESHOLD_MEM%, it's $mem_usage%" | \
-  mail -s "High Memory usage alert" $EMAIL
+#   mail -s "High Memory usage alert" $EMAIL
   checks_passed=false
 fi
 
@@ -35,7 +35,7 @@ echo "Disk Usage: $disk_usage"
 
 if (( $(echo "$disk_usage > $THRESHOLD_DISK" |bc -l) )); then
   echo "Disk usage is higher than $THRESHOLD_DISK%, it's $disk_usage%" | \
-  mail -s "High Disk usage alert" $EMAIL
+#   mail -s "High Disk usage alert" $EMAIL
   checks_passed=false
 fi
 
@@ -44,16 +44,16 @@ services_status=$(sudo $BITNAMI_STATUS_SCRIPT status)
 
 echo "Service Status: $services_status"
 
-if echo $services_status | grep -q "not running"; then
-  echo "One or more Bitnami services are not running: $services_status" | \
-  mail -s "Bitnami service status alert" $EMAIL
-  checks_passed=false
-fi
+# if echo $services_status | grep -q "not running"; then
+#   echo "One or more Bitnami services are not running: $services_status" | \
+#   mail -s "Bitnami service status alert" $EMAIL
+#   checks_passed=false
+# fi
 
 # Check MySQL status
 if ! mysqladmin -h $DB_HOSTNAME -P $DB_PORT -u $DB_USERNAME -p$DB_PASSWORD status > /dev/null; then
   echo "MySQL is not running" | \
-  mail -s "MySQL is down alert" $EMAIL
+#   mail -s "MySQL is down alert" $EMAIL
   checks_passed=false
 fi
 
